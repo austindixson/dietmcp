@@ -4,74 +4,50 @@ MCP/OpenAPI/GraphQL to CLI bridge focused on token-efficient tool usage.
 
 ## Installation
 
-1) Install Python 3.10+
 ```bash
-python3 --version
-```
-
-
-2) Clone and enter the repo
-```bash
-git clone <repo-url>
-cd <repo-name>
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install -e .
 ```
 
 ## Quick Start
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt  # or pip install -e .
+dietmcp --help
+dietmcp discover --help
+dietmcp exec --help
 ```
 
 ## Usage Examples
 
-- Run locally
+- Inspect cache/config commands
 ```bash
-python -m <module_or_script>
+dietmcp cache --help && dietmcp config --help
 ```
 
-- Run tests
+- Discover available tools from configured endpoints
 ```bash
-pytest
+dietmcp discover
 ```
 
-- Show MCP bridge help
+- Execute bridged command with compact output
 ```bash
-cargo run -- --help
+dietmcp exec --help
 ```
 
 ## Implementation Overview
 
-This repository is implemented primarily in **Python** and organized around explicit runtime entrypoints plus supporting modules.
-
-### Key Directories
-
-- `.github/`
-- `benchmark_results/`
-- `docs/`
-- `examples/`
-- `scripts/`
-- `src/`
-- `tests/`
-
-### Key Files
-
-- `pyproject.toml`
-- `README.md`
-- `LICENSE`
-- `.env.example`
-- `.github/workflows/ci.yml`
-
-### Entrypoints
-
+- `src/dietmcp/main.py` registers the command group and top-level CLI lifecycle.
+- `src/dietmcp/cli/` contains subcommands (`discover`, `exec`, `cache`, `config`, `skills`).
+- `examples/` and `tests/` cover integration patterns and protocol behavior.
+- `pyproject.toml` tracks package metadata and dependency constraints.
 
 ## Troubleshooting
 
-- If startup fails, run the primary command with verbose flags and capture stderr logs.
-- If dependencies conflict, remove lock artifacts and reinstall in a clean shell.
-- If tests fail intermittently, run a single test target first, then full suite.
-- Ensure environment variables are loaded before running build/train commands.
+- If `dietmcp` command is missing, reactivate venv and reinstall editable package.
+- If discovery returns empty results, verify upstream MCP/OpenAPI/GraphQL endpoints and auth.
+- If output is noisy, tune CLI flags and cache settings before invoking from agent loops.
 
 ## Visual Overview
 
