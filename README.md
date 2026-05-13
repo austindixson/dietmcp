@@ -2,6 +2,48 @@
 
 MCP/OpenAPI/GraphQL to CLI bridge focused on token-efficient tool usage.
 
+## Presentation Framework (Proven README Pattern)
+
+### TL;DR
+MCP/OpenAPI/GraphQL-to-CLI bridge designed to reduce tool-call token overhead.
+
+### Why this project
+- Solves a concrete workflow problem with reproducible command paths.
+- Prioritizes operator reliability over demo-only output.
+- Structured for practical use, not just conceptual documentation.
+
+### Quick Start
+```bash
+dietmcp --help
+```
+
+### Installation
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install -e .
+```
+
+### Usage Examples
+```bash
+dietmcp discover --help
+dietmcp exec --help
+```
+
+### Architecture at a glance
+- src/dietmcp/main.py — CLI root command group
+- src/dietmcp/cli/ — subcommands (discover/exec/cache/config/skills)
+- tests/ — integration and protocol behavior validation
+
+### Troubleshooting
+- If no tools are discovered, verify endpoint/auth config.
+- If command missing, reactivate venv and reinstall editable package.
+
+### Project status
+Focused on better discovery ergonomics and lower-latency tool execution paths.
+
+
 ## Installation
 
 ```bash
@@ -65,3 +107,11 @@ dietmcp --help
 
 ## Limits
 Benefits depend on tool catalog and output distribution.
+
+## Contributing
+
+Contributions are welcome. Open an issue first for significant changes, then submit a focused PR with reproducible validation steps.
+
+## License
+
+See `LICENSE` for terms.
